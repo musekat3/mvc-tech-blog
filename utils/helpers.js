@@ -1,14 +1,12 @@
 class BlogSite {
     constructor() {
-      // Initialize the blog site with empty data structures (e.g., arrays, objects) for users, blog posts, and comments.
       this.users = {};
       this.blogPosts = [];
       this.comments = [];
   
       // Set the idle timeout threshold in seconds.
-      this.idleTimeout = 30;
-  
-      // Initialize the current user as null (not logged in).
+      this.idleTimeout = 60;
+
       this.currentUser = null;
     }
   
