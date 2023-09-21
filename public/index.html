@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
     <link rel="stylesheet" href="style.css"> 
     <title>Tech Blog</title>
 </head>
@@ -36,13 +37,52 @@
         </ul>
     </nav>
 
-    <div id="content">
-        <Homepage Content>
-        <div id="homepage" style="display: none;">
-            <h1>Welcome to the CMS Blog</h1>
+    <script id="homepage-template" type="text/x-handlebars-template">
+        <div id="homepage">
+            <h1>Welcome to the {{Tech}} Blog</h1>
             <div id="blog-posts">
+                {{#each blogPosts}}
+                    <div class="blog-post">
+                        <h2>{{title}}</h2>
+                        <p>Posted by: {{author}}</p>
+                        <p>Date: {{date}}</p>
+                        <p>{{content}}</p>
+                    </div>
+                {{/each}}
             </div>
         </div>
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Sample data for the homepage
+            const homepageData = {
+                blogName: "Tech Blog",
+                blogPosts: [
+                    {
+                        title: "First Post ",
+                        author: "Kathy",
+                        date: "September 17, 2023",
+                        content: "This is the content of the first blog post."
+                    },
+                    {
+                        title: "Second Post",
+                        author: "Kathy",
+                        date: "September 18, 2023",
+                        content: "This is the content of the second blog post."
+                    }
+                ]
+            };
+    
+            // Compile the Handlebars
+            const homepageSource = document.getElementById("homepage-template").innerHTML;
+            const homepageTemplate = Handlebars.compile(homepageSource);
+    
+            // Insert data into the template and display it
+            const contentDiv = document.getElementById("content");
+            contentDiv.innerHTML = homepageTemplate(homepageData);
+        });
+    </script>
 
         <Dashboard Content>
         <div id="dashboard" style="display: none;">
